@@ -55,10 +55,9 @@ const Data = () => {
           ></path>
         </svg>
       </h1>
-      <h3 className="home__subtitle">Visual Designer</h3>
+      <h3 className="home__subtitle">Full-Stack Web Developer</h3>
       <p className="home__description">
-        I'm creative designer based in New York, and I'm very passionate and
-        dedicated to my work.
+      Software engineering grad student with three years of internship & work experience looking for opportunities to work on an innovative project. (they/them)
       </p>
 
       <a href="#contact" className="button button--flex">
