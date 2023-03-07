@@ -69,6 +69,25 @@
   color: var(--container-color);
 }
 
+.chip{
+	padding: 8px 10px;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 12px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.chip.primary{
+	background: #2F4058;
+	color: whitesmoke;
+}
+
+.short{
+  width:300px;
+  word-wrap: break-word;
+}
+
 /*==================== MEDIA QUERIES ====================*/
 /* For large devices */
 @media screen and (max-width: 992px) {
