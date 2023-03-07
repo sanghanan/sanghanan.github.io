@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-// import data
-import { projectsData } from "./Data";
 import { projectsNav } from "./Data";
+
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 // import components
 import WorkItems from "./WorkItems";
@@ -12,17 +12,34 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [active, setActive] = useState(0);
 
+  const [projectData, setProjectData] = useState([]);
+
+  const fetchPost = async () => {
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    console.log(querySnapshot.docs);
+    const newData = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setProjectData(newData);
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
+
   useEffect(() => {
     // get projects based on item
     if (item.name === "all") {
-      setProjects(projectsData);
+      setProjects(projectData);
     } else {
-      const newProjects = projectsData.filter((project) => {
+      const newProjects = projectData.filter((project) => {
         return project.category.toLowerCase() === item.name;
       });
       setProjects(newProjects);
     }
-  }, [item]);
+  }, [item, projectData]);
 
   const handleClick = (e, index) => {
     setItem({ name: e.target.textContent.toLowerCase() });
@@ -32,7 +49,7 @@ const Projects = () => {
   return (
     <div>
       {/* projects nav */}
-      <div class="work__filters">
+      <div className="work__filters">
         {projectsNav.map((item, index) => {
           return (
             <span

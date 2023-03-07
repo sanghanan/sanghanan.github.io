@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./skills.css";
 import SkillBox from "./SkillBox";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 const Skills = () => {
   const [skillsets, setSkillSets] = useState([]);
 
   const fetchPost = async () => {
     const querySnapshot = await getDocs(collection(db, "skillsets"));
+    console.log(querySnapshot.docs);
     const newData = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
     setSkillSets(newData);
+    console.log("Hello!")
     console.log(newData);
   };
 
@@ -27,7 +29,10 @@ const Skills = () => {
       <span className="section__subtitle">What you see is what you get</span>
 
       <div className="skills__container container grid">
-        <SkillBox skillSetName="Frontend" skills={["HTML", "CSS"]} />
+        { skillsets.map((skillset)=>
+          <SkillBox skillSetName={skillset.name} skills={skillset.skills} />
+        ) }
+        
       </div>
     </section>
   );

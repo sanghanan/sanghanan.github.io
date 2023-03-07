@@ -7,7 +7,7 @@ const WorkItems = ({ item }) => {
       <img src={item.image} alt="" className="work__img" />
       <h3 className="work__title">{item.title}</h3>
       <p className="short">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod labore aperiam ex hic, cupiditate odit amet et! Eum, in eligendi.
+        {item.description}
       </p>
       <a href="#" className="work__button">
         Demo
